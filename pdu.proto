@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "auth.proto";
+import "order.proto";
+
+package pdus;
+
+option java_package = "protobuf.pdus";
+option java_outer_classname = "Pdu";
+
+/**
+    PDU que cliente envia
+*/
+
+message PduFromClient {
+    oneof request{
+        order.OrderRequestData order = 1;
+        auth.AuthRequest       auth  = 2;
+    }
+}
+

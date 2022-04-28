@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package order;
+
+option java_package = "protobuf.order";
+option java_outer_classname = "Order";
+
+
+/**
+    Tipo da transação.
+*/
+enum OrderRequestType {
+    BUY     = 0;
+    SELL    = 1;
+}
+
+/**
+    Mensagem a ser enviada nas ordens de compra e venda.
+*/
+message OrderRequestData {
+    OrderRequestType order_type = 1; /* Tipo da transação */
+    string company              = 2; /* Empresa sobre a qual recai a transação*/
+    int32 qtd                   = 3; /* Número de acções a comprar */
+    int32 price                 = 4; /* Preço de compra máximo nas ordens de compra.
+                                        Preço de compra mínimo nas ordens de venda.*/
+    string username             = 5; /* Username de quem fez o pedido*/
+}
+
+/**
+    Tipo de resposta
+*/
+enum OrderReplyType {
+    OK        = 0; /* A transação foi registada */
+    NOT_OK    = 1; /* A transação não foi registada */
+    INVALID_COMPANY = 2; /* A empresa não existe */
+    NOT_LOGGED_IN   = 3; /* O utilizador indicou uma operação que apenas pode fazer
+                            se tiver o login feito*/
+}
+
+/**
+    Mensagem a ser enviada nas ordens de compra e venda.
+*/
+message OrderReplyData {
+    OrderReplyType reply_type   = 1; /* Tipo da transação */
+}
+
+

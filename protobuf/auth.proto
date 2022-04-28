@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package auth;
+
+option java_package = "protobuf.auth";
+option java_outer_classname = "Auth";
+
+/**
+    Indica se o cliente pretende fazer login ou logout.
+*/
+enum AuthRequestType{
+    LOGIN  = 0;
+    LOGOUT = 1;
+}
+
+/**
+    Mensagem que será enviada num pedido de autenticação pelo cliente.
+    Tanto para fazer login como para fazer logout o utilizador deve indicar a password.
+*/
+message AuthRequest {
+    AuthRequestType auth_type   = 1;
+    string username             = 2;
+    string password             = 3;
+}
+
+/**
+    Indica se o utilizador pretende fazer login ou logout.
+*/
+enum AuthReplyType{
+    OK              = 0; /* Login ok */
+    WRONG_USER      = 1; /* Login falha por utilizador não existir */
+    WRONG_PASSWORD  = 2; /* Login falha por utilizador existir mas password estar errada */
+    NOT_OK          = 3; /* Motivo de falha genérico.
+                            Motivo desconhecido ou intencionalmente não indicado ao utilizador
+                            por razões de segurança.  */
+    NOT_LOGGED_IN   = 4; /* O utilizador indicou uma operação que apenas pode fazer
+    se tiver o login feito*/
+    
+}
+
+message AuthReply {
+    AuthReplyType reply_type = 1;
+}
+
+

@@ -1,0 +1,7 @@
+curl 127.0.0.1:8080/empresas
+
+curl -X POST "127.0.0.1:8080/empresas?name=empresa1&clientaddr=localhost:12345&servidoraddr=localhost:7001"
+
+curl -X POST "127.0.0.1:8080/empresas?name=empresa2&clientaddr=localhost:12345&servidoraddr=localhost:7001"
+
+
